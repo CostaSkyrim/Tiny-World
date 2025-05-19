@@ -1,0 +1,11 @@
+Model Information:
+* title:	roomba
+* source:	https://sketchfab.com/3d-models/roomba-16509583bde6415a80734c2407c31956
+* author:	aven (https://sketchfab.com/lillianmazanek)
+
+Model License:
+* license type:	CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
+* requirements:	Author must be credited. Commercial use is allowed.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "roomba" (https://sketchfab.com/3d-models/roomba-16509583bde6415a80734c2407c31956) by aven (https://sketchfab.com/lillianmazanek) licensed under CC-BY-4.0 (http://creativecommons.org/licenses/by/4.0/)
