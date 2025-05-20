@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class ClimbController : MonoBehaviour
 {
@@ -19,16 +20,19 @@ public class ClimbController : MonoBehaviour
     private float currentClimbTopY;
     private CharacterController characterController;
 
+    private StarterAssets.ThirdPersonController thirdPersonController;
+
     void Start()
     {
         characterController = GetComponent<CharacterController>();
+        thirdPersonController = GetComponent<StarterAssets.ThirdPersonController>();
     }
 
     void Update()
     {
         if (isGrabbingLedge) return;
 
-        // Toggle climb with C key
+        // Toggle climbing with C key
         if (Input.GetKeyDown(KeyCode.C))
         {
             if (!isClimbing)
@@ -37,7 +41,7 @@ public class ClimbController : MonoBehaviour
                 StopClimbing();
         }
 
-        // Climbing movement logic
+        // Handle climbing movement
         if (isClimbing)
         {
             float verticalInput = Input.GetAxis("Vertical");
@@ -71,8 +75,13 @@ public class ClimbController : MonoBehaviour
             Debug.Log("Climbable surface detected!");
 
             isClimbing = true;
-            characterController.enabled = false;
             animator.SetBool("isClimbing", true);
+
+            // Disable movement controller and CharacterController
+            if (thirdPersonController != null)
+                thirdPersonController.enabled = false;
+
+            characterController.enabled = false;
 
             // Snap to wall
             Vector3 snapPosition = hit.point - direction * 0.4f;
@@ -83,7 +92,7 @@ public class ClimbController : MonoBehaviour
             lookDir.y = 0f;
             transform.rotation = Quaternion.LookRotation(lookDir);
 
-            // Get top Y position of object
+            // Store top of wall
             currentClimbTopY = hit.collider.bounds.max.y;
         }
         else
@@ -97,34 +106,53 @@ public class ClimbController : MonoBehaviour
         isClimbing = false;
         animator.SetBool("isClimbing", false);
         animator.SetFloat("climbSpeed", 0f);
+
         characterController.enabled = true;
+
+        if (thirdPersonController != null)
+            thirdPersonController.enabled = true;
     }
 
     void TriggerLedgeGrab()
     {
         Debug.Log("Triggering ledge grab.");
+
         isClimbing = false;
         isGrabbingLedge = true;
 
-        // Stop climbing animation
         animator.SetBool("isClimbing", false);
         animator.SetFloat("climbSpeed", 0f);
         animator.SetTrigger("ledgeGrab");
 
+        // Disable movement and controller
+        if (thirdPersonController != null)
+            thirdPersonController.enabled = false;
+
         characterController.enabled = false;
 
-        // Move the character forward & up slightly (simulate mount)
+        // Move player up and forward slightly
         Vector3 forward = transform.forward;
         Vector3 offset = forward * dismountDistance + Vector3.up * dismountUpOffset;
         transform.position += offset;
 
+        // Optional: pull slightly down to ensure ground detection
+        transform.position -= Vector3.up * 0.05f;
+
         StartCoroutine(EndLedgeGrabAfterDelay(ledgeGrabDuration));
     }
 
-    System.Collections.IEnumerator EndLedgeGrabAfterDelay(float delay)
+    IEnumerator EndLedgeGrabAfterDelay(float delay)
     {
         yield return new WaitForSeconds(delay);
+
         characterController.enabled = true;
+
+        // Wait one frame before re-enabling movement
+        yield return null;
+
+        if (thirdPersonController != null)
+            thirdPersonController.enabled = true;
+
         isGrabbingLedge = false;
     }
 }
