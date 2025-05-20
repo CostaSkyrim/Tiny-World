@@ -18,8 +18,8 @@ public class ClimbController : MonoBehaviour
     private bool isClimbing = false;
     private bool isGrabbingLedge = false;
     private float currentClimbTopY;
-    private CharacterController characterController;
 
+    private CharacterController characterController;
     private StarterAssets.ThirdPersonController thirdPersonController;
 
     void Start()
@@ -32,21 +32,18 @@ public class ClimbController : MonoBehaviour
     {
         if (isGrabbingLedge) return;
 
-        // Toggle climbing with C key
-        if (Input.GetKeyDown(KeyCode.C))
+        float verticalInput = Input.GetAxis("Vertical");
+
+        // Auto-start climbing when pressing W toward a climbable wall
+        if (!isClimbing && verticalInput > 0.1f && CheckForClimbableSurface())
         {
-            if (!isClimbing)
-                TryStartClimbing();
-            else
-                StopClimbing();
+            TryStartClimbing();
         }
 
-        // Handle climbing movement
+        // Climbing movement
         if (isClimbing)
         {
-            float verticalInput = Input.GetAxis("Vertical");
             animator.SetFloat("climbSpeed", verticalInput);
-
             Vector3 climbMovement = new Vector3(0f, verticalInput * climbSpeed, 0f);
             transform.Translate(climbMovement * Time.deltaTime);
 
@@ -64,6 +61,20 @@ public class ClimbController : MonoBehaviour
         }
     }
 
+    bool CheckForClimbableSurface()
+    {
+        RaycastHit hit;
+        Vector3 origin = transform.position + Vector3.up * 1.2f;
+        Vector3 direction = transform.forward;
+
+        if (Physics.Raycast(origin, direction, out hit, climbCheckDistance, climbableLayer))
+        {
+            return true;
+        }
+
+        return false;
+    }
+
     void TryStartClimbing()
     {
         RaycastHit hit;
@@ -77,7 +88,7 @@ public class ClimbController : MonoBehaviour
             isClimbing = true;
             animator.SetBool("isClimbing", true);
 
-            // Disable movement controller and CharacterController
+            // Disable movement + physics controller
             if (thirdPersonController != null)
                 thirdPersonController.enabled = false;
 
@@ -92,12 +103,8 @@ public class ClimbController : MonoBehaviour
             lookDir.y = 0f;
             transform.rotation = Quaternion.LookRotation(lookDir);
 
-            // Store top of wall
+            // Record top of object
             currentClimbTopY = hit.collider.bounds.max.y;
-        }
-        else
-        {
-            Debug.Log("No climbable surface detected.");
         }
     }
 
@@ -124,19 +131,18 @@ public class ClimbController : MonoBehaviour
         animator.SetFloat("climbSpeed", 0f);
         animator.SetTrigger("ledgeGrab");
 
-        // Disable movement and controller
         if (thirdPersonController != null)
             thirdPersonController.enabled = false;
 
         characterController.enabled = false;
 
-        // Move player up and forward slightly
+        // Move forward and upward slightly
         Vector3 forward = transform.forward;
         Vector3 offset = forward * dismountDistance + Vector3.up * dismountUpOffset;
         transform.position += offset;
 
-        // Optional: pull slightly down to ensure ground detection
-        transform.position -= Vector3.up * 0.05f;
+        // Help physics register ground contact
+        transform.position -= Vector3.up * 0.1f;
 
         StartCoroutine(EndLedgeGrabAfterDelay(ledgeGrabDuration));
     }
@@ -147,7 +153,12 @@ public class ClimbController : MonoBehaviour
 
         characterController.enabled = true;
 
-        // Wait one frame before re-enabling movement
+        // Wait for one physics frame
+        yield return new WaitForFixedUpdate();
+
+        // Extra nudge down to force grounded detection
+        transform.position -= Vector3.up * 0.05f;
+
         yield return null;
 
         if (thirdPersonController != null)
