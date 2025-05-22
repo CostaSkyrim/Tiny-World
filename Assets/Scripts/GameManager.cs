@@ -1,74 +1,103 @@
 using StarterAssets;
 using UnityEngine;
-using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager Instance;
 
-    [Header("Death Settings")]
-    public bool freezeTimeOnDeath = true;
-    public float deathDelay = 2f;
+    [Header("References")]
+    public Transform spawnPoint; // Assign in Inspector
 
+    private ThirdPersonController player;
+    private Animator anim;
+    private StarterAssetsInputs input;
     private bool isDead = false;
 
     private void Awake()
     {
-        // Singleton setup
         if (Instance == null) Instance = this;
         else Destroy(gameObject);
-
-        // Optional: Don't destroy on scene load
-        // DontDestroyOnLoad(gameObject);
     }
 
-    /// <summary>
-    /// Call this from any hazard or system to kill the player.
-    /// </summary>
+    private void Start()
+    {
+        player = FindObjectOfType<ThirdPersonController>();
+        anim = player.GetComponent<Animator>();
+        input = player.GetComponent<StarterAssetsInputs>();
+    }
+
     public void KillPlayer(string reason)
     {
         if (isDead) return;
-
         isDead = true;
+
         Debug.Log($" Player died: {reason}");
 
-        // Disable input (optional: use your input system)
-        StarterAssetsInputs input = FindObjectOfType<StarterAssetsInputs>();
-        if (input != null) input.enabled = false;
+        // Refresh references in case they're lost
+        player = FindObjectOfType<ThirdPersonController>();
+        anim = player.GetComponent<Animator>();
+        input = player.GetComponent<StarterAssetsInputs>();
 
-        // Optional: play death animation
-        ThirdPersonController player = FindObjectOfType<ThirdPersonController>();
-        if (player != null)
+        // Disable player input
+        input.move = Vector2.zero;
+        input.enabled = false;
+
+        // Trigger appropriate death animation
+        Debug.Log("Setting animation trigger: " + reason);
+
+        switch (reason)
         {
-            Animator anim = player.GetComponent<Animator>();
-            if (anim != null)
-            {
-                anim.SetTrigger("Die"); // Make sure you have a "Die" trigger in Animator
-            }
+            case "Stepped in soda":
+                anim.SetTrigger("deathLiquid");
+                break;
+            case "Caught by Roomba":
+                anim.SetTrigger("deathRoomba");
+                break;
+            case "Fell from height":
+                anim.SetTrigger("deathFall");
+                break;
+            default:
+                anim.SetTrigger("deathFall");
+                break;
         }
 
-        // Optional: freeze time or delay restart
-        if (freezeTimeOnDeath)
-            Time.timeScale = 0f;
-        else
-            Invoke(nameof(RestartLevel), deathDelay);
+        Debug.Log("Trigger set");
+
+        // Start respawn coroutine
+        StartCoroutine(RespawnAfterDeathAnimation());
     }
 
-    /// <summary>
-    /// Restarts the current scene (if time isn't frozen).
-    /// </summary>
-    private void RestartLevel()
+    private System.Collections.IEnumerator RespawnAfterDeathAnimation()
     {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
-    }
+        yield return null;
 
-    /// <summary>
-    /// Public method to be called from a UI button to restart.
-    /// </summary>
-    public void RestartManually()
-    {
-        Time.timeScale = 1f;
-        SceneManager.LoadScene(SceneManager.GetActiveScene().buildIndex);
+        AnimatorStateInfo state = anim.GetCurrentAnimatorStateInfo(0);
+
+        // Wait until we're in a death animation state
+        while (!state.IsName("Death_Liquid") && !state.IsName("Death_Fall") && !state.IsName("Death_Roomba"))
+        {
+            yield return null;
+            state = anim.GetCurrentAnimatorStateInfo(0);
+        }
+
+        Debug.Log($" Waiting for death animation: {state.length} seconds");
+
+        yield return new WaitForSeconds(state.length);
+
+        Debug.Log(" Respawning player...");
+
+        // Respawn at spawn point
+        player.transform.position = spawnPoint.position;
+        player.transform.rotation = spawnPoint.rotation;
+
+        // Reset Animator
+        anim.Rebind();
+        anim.Update(0f);
+
+        // Re-enable player input
+        input.enabled = true;
+        isDead = false;
+
+        Debug.Log(" Player respawned.");
     }
 }
