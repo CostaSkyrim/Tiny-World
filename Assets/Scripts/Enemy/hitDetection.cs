@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(Collider))]
 public class hitDetection : MonoBehaviour
 {
     // Start is called before the first frame update
@@ -19,7 +20,7 @@ public class hitDetection : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            GameManager.Instance.KillPlayer("Enemy Collision");
+            GameManager.Instance.KillPlayer("Caught by Roomba");
         }
     }
 }
