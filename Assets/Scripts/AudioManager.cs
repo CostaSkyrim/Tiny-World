@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 
 public class AudioManager : MonoBehaviour
@@ -7,6 +8,7 @@ public class AudioManager : MonoBehaviour
     public AudioSource musicSource;
     public AudioClip deskMusic;
     public AudioClip floorMusic;
+    public AudioSource sfxSource;
 
     private AudioClip currentMusic;
 
@@ -45,5 +47,27 @@ public class AudioManager : MonoBehaviour
             musicSource.clip = floorMusic;
             musicSource.Play();
         }
+    }
+
+    public void PlaySFX(AudioClip clip)
+    {
+        if (clip != null && sfxSource != null)
+        {
+            sfxSource.PlayOneShot(clip);
+        }
+    }
+
+    // Optional: lower music volume temporarily
+    public void DuckMusic(float factor, float duration)
+    {
+        StartCoroutine(FadeMusicVolume(factor, duration));
+    }
+
+    private IEnumerator FadeMusicVolume(float factor, float duration)
+    {
+        float original = musicSource.volume;
+        musicSource.volume *= factor;
+        yield return new WaitForSeconds(duration);
+        musicSource.volume = original;
     }
 }
