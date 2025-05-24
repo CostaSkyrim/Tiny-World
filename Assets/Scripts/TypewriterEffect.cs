@@ -5,12 +5,21 @@ using System.Collections;
 public class TypewriterEffect : MonoBehaviour
 {
     public TextMeshProUGUI textMesh;
-    public string fullText = "You’re Alex — a tired indie game developer working late at the office during a game jam crunch.";
+    [TextArea] public string fullText;
     public float delay = 0.04f;
 
-    void Start() => StartCoroutine(ShowText());
+    private Coroutine typingCoroutine;
 
-    IEnumerator ShowText()
+    public void StartTyping()
+    {
+        // Reset text and stop any previous coroutine
+        if (typingCoroutine != null)
+            StopCoroutine(typingCoroutine);
+
+        typingCoroutine = StartCoroutine(TypeText());
+    }
+
+    IEnumerator TypeText()
     {
         textMesh.text = "";
         for (int i = 0; i <= fullText.Length; i++)

@@ -4,52 +4,37 @@ using System.Collections;
 
 public class ComicSlideManager : MonoBehaviour
 {
+    [Header("Typewriter Effects")]
+    public TypewriterEffect[] panelTextEffects;
+
     [Header("Panel Slide Settings")]
-    public RectTransform panelContainer; // The parent of all panels
-    public int panelWidth = 1920;         // Fixed width of each panel
-    public float transitionDuration = 0.6f;
+    public RectTransform panelContainer;      // Parent of all panels
+    public int panelWidth = 1920;             // Width of each panel in pixels
+    public float transitionDuration = 0.6f;   // How long each slide takes
+    public float timeBetweenSlides = 4f;      // Seconds before advancing to next panel
 
     [Header("Video Players")]
-    public VideoPlayer[] panelVideoPlayers; // One VideoPlayer per panel
+    public VideoPlayer[] panelVideoPlayers;   // One VideoPlayer per panel
 
     private int currentIndex = 0;
     private bool isSliding = false;
 
     void Start()
     {
-        PlayOnlyCurrentVideo(); // Start video on Panel 0
-    }
-
-    void Update()
-    {
-        if (Input.GetKeyDown(KeyCode.RightArrow))
-        {
-            SlideNext();
-        }
-        else if (Input.GetKeyDown(KeyCode.LeftArrow))
-        {
-            SlidePrevious();
-        }
-    }
-
-    public void SlideNext()
-    {
-        if (isSliding || currentIndex >= panelVideoPlayers.Length - 1)
-            return;
-
-        currentIndex++;
-        StartCoroutine(SlideToPosition(-currentIndex * panelWidth));
         PlayOnlyCurrentVideo();
+        StartCoroutine(AutoAdvanceCutscene());
     }
 
-    public void SlidePrevious()
+    IEnumerator AutoAdvanceCutscene()
     {
-        if (isSliding || currentIndex <= 0)
-            return;
+        while (currentIndex < panelVideoPlayers.Length - 1)
+        {
+            yield return new WaitForSeconds(timeBetweenSlides);
 
-        currentIndex--;
-        StartCoroutine(SlideToPosition(-currentIndex * panelWidth));
-        PlayOnlyCurrentVideo();
+            currentIndex++;
+            StartCoroutine(SlideToPosition(-currentIndex * panelWidth));
+            PlayOnlyCurrentVideo();
+        }
     }
 
     IEnumerator SlideToPosition(float targetX)
@@ -74,16 +59,25 @@ public class ComicSlideManager : MonoBehaviour
     {
         for (int i = 0; i < panelVideoPlayers.Length; i++)
         {
-            if (panelVideoPlayers[i] == null) continue;
-
-            if (i == currentIndex)
+            if (panelVideoPlayers[i] != null)
             {
-                panelVideoPlayers[i].Stop(); // Restart from beginning
-                panelVideoPlayers[i].Play();
+                if (i == currentIndex)
+                {
+                    panelVideoPlayers[i].Stop();
+                    panelVideoPlayers[i].Play();
+                }
+                else
+                {
+                    panelVideoPlayers[i].Stop();
+                }
             }
-            else
+
+            if (panelTextEffects.Length > i && panelTextEffects[i] != null)
             {
-                panelVideoPlayers[i].Stop(); // Or use Pause() to resume later
+                if (i == currentIndex)
+                    panelTextEffects[i].StartTyping();
+                else
+                    panelTextEffects[i].StopAllCoroutines(); // Kill other text animations
             }
         }
     }
