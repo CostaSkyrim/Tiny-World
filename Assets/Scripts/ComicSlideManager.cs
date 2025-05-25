@@ -1,9 +1,19 @@
 using UnityEngine;
 using UnityEngine.Video;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class ComicSlideManager : MonoBehaviour
 {
+
+    [Header("Fade Settings")]
+    public CanvasGroup fadeCanvasGroup;
+    public float fadeDuration = 1f;
+
+    [Header("Scene Transition")]
+    public string nextSceneName;           // Set this in the Inspector
+    public float delayAfterLastPanel = 2f; // Time to wait before switching
+
     [Header("Typewriter Effects")]
     public TypewriterEffect[] panelTextEffects;
 
@@ -30,11 +40,34 @@ public class ComicSlideManager : MonoBehaviour
         while (currentIndex < panelVideoPlayers.Length - 1)
         {
             yield return new WaitForSeconds(timeBetweenSlides);
-
             currentIndex++;
             StartCoroutine(SlideToPosition(-currentIndex * panelWidth));
             PlayOnlyCurrentVideo();
         }
+
+        // Wait before fade
+        yield return new WaitForSeconds(timeBetweenSlides);
+
+        // Start fade-out
+        yield return StartCoroutine(FadeToBlack());
+
+        // Wait a moment, then load next scene
+        yield return new WaitForSeconds(delayAfterLastPanel);
+        SceneManager.LoadScene(nextSceneName);
+    }
+
+    IEnumerator FadeToBlack()
+    {
+        float elapsed = 0f;
+
+        while (elapsed < fadeDuration)
+        {
+            elapsed += Time.deltaTime;
+            fadeCanvasGroup.alpha = Mathf.Lerp(0, 1, elapsed / fadeDuration);
+            yield return null;
+        }
+
+        fadeCanvasGroup.alpha = 1;
     }
 
     IEnumerator SlideToPosition(float targetX)
