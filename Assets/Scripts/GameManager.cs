@@ -15,6 +15,7 @@ public class GameManager : MonoBehaviour
     private ThirdPersonController player;
     private Animator anim;
     private StarterAssetsInputs input;
+    private CharacterController charController;
     private bool isDead = false;
 
     private void Awake()
@@ -28,6 +29,7 @@ public class GameManager : MonoBehaviour
         player = FindObjectOfType<ThirdPersonController>();
         anim = player.GetComponent<Animator>();
         input = player.GetComponent<StarterAssetsInputs>();
+        charController = player.GetComponent<CharacterController>();
     }
 
     public void KillPlayer(string reason)
@@ -40,9 +42,21 @@ public class GameManager : MonoBehaviour
         player = FindObjectOfType<ThirdPersonController>();
         anim = player.GetComponent<Animator>();
         input = player.GetComponent<StarterAssetsInputs>();
+        charController = player.GetComponent<CharacterController>();
 
-        input.move = Vector2.zero;
-        input.enabled = false;
+        player.enabled = false;
+
+        if (input != null)
+        {
+            input.move = Vector2.zero;
+            input.enabled = false;
+            input.jump = false;
+        }
+
+        if (charController != null)
+        {
+            charController.enabled = false;
+        }
 
         Debug.Log("Setting animation trigger: " + reason);
 
@@ -112,8 +126,18 @@ public class GameManager : MonoBehaviour
             yield return StartCoroutine(fadeUI.FadeOut());
         }
 
+        player.enabled = true;
+
         // Restore control
-        input.enabled = true;
+        if (input != null)
+        {
+            input.enabled = true;
+        }
+
+        if (charController != null)
+        {
+            charController.enabled = true;
+        }
         isDead = false;
 
         Debug.Log(" Player respawned.");
