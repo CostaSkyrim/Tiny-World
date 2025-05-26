@@ -5280,6 +5280,100 @@ Transform:
   m_Father: {fileID: 1323671166}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 180, z: 0}
+--- !u!1001 &17143552
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 17
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -2.34
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 36.53
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -88.31
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.4114856
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.5402115
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.583953
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.4448035
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -105.406
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -94.457
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bb0ffe13402c6bd489fc333cb8c3d7cc, type: 2}
+    - target: {fileID: 919132149155446097, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_Name
+      value: Ruler2 (1)
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e999c7dc949188c459af356964746939, type: 3}
 --- !u!1 &17715014
 GameObject:
   m_ObjectHideFlags: 0
@@ -16002,7 +16096,7 @@ Transform:
   - {fileID: 1323671166}
   - {fileID: 8729192427498425188}
   m_Father: {fileID: 0}
-  m_RootOrder: 1
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &59030201
 GameObject:
@@ -16399,7 +16493,7 @@ RectTransform:
   m_Children:
   - {fileID: 2091571032}
   m_Father: {fileID: 0}
-  m_RootOrder: 12
+  m_RootOrder: 13
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -16636,7 +16730,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 8
+  m_RootOrder: 9
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &96691478
 GameObject:
@@ -17310,7 +17404,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 15
+  m_RootOrder: 16
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &117801515
 GameObject:
@@ -24408,7 +24502,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &237260385
 GameObject:
@@ -24723,7 +24817,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 6
+  m_RootOrder: 7
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &271889518
 GameObject:
@@ -32396,7 +32490,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 14
+  m_RootOrder: 15
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &445759331
 GameObject:
@@ -38350,6 +38444,51 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 523438232}
   m_Mesh: {fileID: 5470453400621424887, guid: 7ab63061358801f488d75d9c35dc8b26, type: 3}
+--- !u!1 &530786976
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 530786977}
+  - component: {fileID: 530786978}
+  m_Layer: 0
+  m_Name: Ground (1)
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &530786977
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530786976}
+  m_LocalRotation: {x: -0, y: 0.044217203, z: -0, w: 0.99902195}
+  m_LocalPosition: {x: -2.0220923, y: 0.818, z: -12.504281}
+  m_LocalScale: {x: 1.5, y: 1, z: 0.775}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 1718856763}
+  m_RootOrder: 1
+  m_LocalEulerAnglesHint: {x: 0, y: 5.069, z: 0}
+--- !u!65 &530786978
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 530786976}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 0.051884685, z: 1}
+  m_Center: {x: 0, y: -0.47405738, z: 0}
 --- !u!1 &531845534
 GameObject:
   m_ObjectHideFlags: 0
@@ -54549,7 +54688,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 624683023}
   m_LocalRotation: {x: 0.009566398, y: -0.011200813, z: 0.76032346, w: 0.64937764}
-  m_LocalPosition: {x: 0.38175, y: -3.58, z: -0.1538}
+  m_LocalPosition: {x: 0.409, y: -3.576, z: -0.155}
   m_LocalScale: {x: 48.48277, y: 25.32059, z: 31.37924}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -54614,11 +54753,11 @@ BoxCollider:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 624683023}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.04484888, y: 0.005252276, z: 0.0011464132}
-  m_Center: {x: 0.011728001, y: -0.00028493832, z: 5.9929417e-10}
+  m_Size: {x: 0.046180934, y: 0.008623178, z: 0.0048199156}
+  m_Center: {x: 0.012394, y: -0.000059403723, z: 0.0012777746}
 --- !u!114 &624683028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -54631,8 +54770,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 846c96a23053fc443b2fa3fbd91bd26a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  messagePanel: {fileID: 2091571031}
+  tutorialMessageText: {fileID: 2091571033}
+  messageGroup: {fileID: 2091571035}
   message: I can't even jump over a cable. I need to cut it. Where are the scissors?
+  displayTime: 4
+  fadeDuration: 1
 --- !u!1 &627879239
 GameObject:
   m_ObjectHideFlags: 0
@@ -55345,7 +55487,7 @@ RectTransform:
   m_Children:
   - {fileID: 2072123486}
   m_Father: {fileID: 0}
-  m_RootOrder: 10
+  m_RootOrder: 11
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -71727,7 +71869,7 @@ Transform:
   - {fileID: 1764429495}
   - {fileID: 7662668833072913634}
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &834853422
 GameObject:
@@ -72181,6 +72323,25 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 854128771}
   m_Mesh: {fileID: -150962828156391692, guid: db6ea0fd984528c49ab939f5eb5d660e, type: 3}
+--- !u!1 &857330856 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e999c7dc949188c459af356964746939,
+    type: 3}
+  m_PrefabInstance: {fileID: 1780334601}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &857330857
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 857330856}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.15749998, y: 0.024264697, z: 0.0021669858}
+  m_Center: {x: 0, y: 0, z: 1.1641532e-10}
 --- !u!1 &859411480
 GameObject:
   m_ObjectHideFlags: 0
@@ -93390,7 +93551,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 7
+  m_RootOrder: 8
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &995119290
 MonoBehaviour:
@@ -99499,7 +99660,7 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 13
+  m_RootOrder: 14
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1088723211
 GameObject:
@@ -100237,6 +100398,25 @@ Light:
   m_UseViewFrustumForShadowCasterCull: 1
   m_ShadowRadius: 0
   m_ShadowAngle: 0
+--- !u!1 &1139713259 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: e999c7dc949188c459af356964746939,
+    type: 3}
+  m_PrefabInstance: {fileID: 17143552}
+  m_PrefabAsset: {fileID: 0}
+--- !u!65 &1139713260
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1139713259}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 0.15749998, y: 0.024264697, z: 0.0021669858}
+  m_Center: {x: 0, y: 0, z: 1.1641532e-10}
 --- !u!1 &1159969919
 GameObject:
   m_ObjectHideFlags: 0
@@ -134357,6 +134537,7 @@ GameObject:
   - component: {fileID: 1518590189}
   - component: {fileID: 1518590194}
   - component: {fileID: 1518590192}
+  - component: {fileID: 1518590195}
   m_Layer: 0
   m_Name: "\u041A\u0440\u0438\u0432\u0430\u0411\u0435\u0437\u044C\u0454 (2)"
   m_TagString: Untagged
@@ -134442,8 +134623,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 846c96a23053fc443b2fa3fbd91bd26a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  messagePanel: {fileID: 2091571031}
+  tutorialMessageText: {fileID: 2091571033}
+  messageGroup: {fileID: 2091571035}
   message: I can't even jump over a cable. I need to cut it. Where are the scissors?
+  displayTime: 4
+  fadeDuration: 1
 --- !u!65 &1518590194
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -134457,6 +134641,18 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 0.04484887, y: 0.005252276, z: 0.014571619}
   m_Center: {x: 0.011728012, y: -0.00028500927, z: 0.006712642}
+--- !u!225 &1518590195
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1518590186}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1519941194
 GameObject:
   m_ObjectHideFlags: 0
@@ -150835,7 +151031,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1627634945}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.957, z: 0}
+  m_LocalPosition: {x: 0, y: 0.969, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -171908,8 +172104,9 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children:
   - {fileID: 1627634946}
+  - {fileID: 530786977}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1722324964
 GameObject:
@@ -177598,6 +177795,100 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1777529932}
   m_Mesh: {fileID: -150962828156391692, guid: db6ea0fd984528c49ab939f5eb5d660e, type: 3}
+--- !u!1001 &1780334601
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_RootOrder
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_LocalScale.x
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_LocalScale.y
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_LocalScale.z
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 2.78
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 35.47
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -74.12
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.5515876
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0.58925194
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_LocalRotation.y
+      value: -0.4468646
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0.38580492
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: -95.816
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 22.207
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: -94.457
+      objectReference: {fileID: 0}
+    - target: {fileID: -8679921383154817045, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_ConstrainProportionsScale
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: -7511558181221131132, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_Materials.Array.data[0]
+      value: 
+      objectReference: {fileID: 2100000, guid: bb0ffe13402c6bd489fc333cb8c3d7cc, type: 2}
+    - target: {fileID: 919132149155446097, guid: e999c7dc949188c459af356964746939,
+        type: 3}
+      propertyPath: m_Name
+      value: Ruler2
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: e999c7dc949188c459af356964746939, type: 3}
 --- !u!1 &1780624098
 GameObject:
   m_ObjectHideFlags: 0
@@ -184131,7 +184422,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!4 &1885350176
 Transform:
   m_ObjectHideFlags: 0
@@ -184173,8 +184464,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 846c96a23053fc443b2fa3fbd91bd26a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  messagePanel: {fileID: 0}
+  tutorialMessageText: {fileID: 0}
+  messageGroup: {fileID: 0}
   message: I can't even jump over a cable. I need to cut it. Where are the scissors?
+  displayTime: 4
+  fadeDuration: 1
 --- !u!33 &1885350179
 MeshFilter:
   m_ObjectHideFlags: 0
@@ -184377,7 +184671,7 @@ RectTransform:
   - {fileID: 1812598901}
   - {fileID: 1705708170}
   m_Father: {fileID: 0}
-  m_RootOrder: 11
+  m_RootOrder: 12
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -185189,7 +185483,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!114 &1952023642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -185266,7 +185560,7 @@ RectTransform:
   - {fileID: 887795169}
   - {fileID: 1973011864}
   m_Father: {fileID: 0}
-  m_RootOrder: 9
+  m_RootOrder: 10
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -185950,6 +186244,7 @@ GameObject:
   - component: {fileID: 1975156764}
   - component: {fileID: 1975156766}
   - component: {fileID: 1975156767}
+  - component: {fileID: 1975156768}
   m_Layer: 0
   m_Name: "\u041A\u0440\u0438\u0432\u0430\u0411\u0435\u0437\u044C\u0454 (3)"
   m_TagString: Untagged
@@ -185965,7 +186260,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1975156761}
   m_LocalRotation: {x: -0.09064502, y: -0.0702193, z: 0.7516365, w: 0.6495347}
-  m_LocalPosition: {x: 0.6677, y: -5.64, z: -0.09845}
+  m_LocalPosition: {x: 0.69, y: -5.636, z: -0.099}
   m_LocalScale: {x: 47.128384, y: 24.613253, z: 30.502655}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -186033,8 +186328,8 @@ BoxCollider:
   m_IsTrigger: 1
   m_Enabled: 1
   serializedVersion: 2
-  m_Size: {x: 0.04484888, y: 0.005252275, z: 0.0011464115}
-  m_Center: {x: 0.011728012, y: -0.00028493928, z: -0.000000029812114}
+  m_Size: {x: 0.044848874, y: 0.008819243, z: 0.0011464118}
+  m_Center: {x: 0.011728016, y: -0.0020684241, z: -0.000000028292881}
 --- !u!114 &1975156767
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -186047,8 +186342,23 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 846c96a23053fc443b2fa3fbd91bd26a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  messagePanel: {fileID: 2091571031}
+  tutorialMessageText: {fileID: 2091571033}
+  messageGroup: {fileID: 2091571035}
   message: I can't even jump over a cable. I need to cut it. Where are the scissors?
+  displayTime: 4
+  fadeDuration: 1
+--- !u!225 &1975156768
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1975156761}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &1977468373
 GameObject:
   m_ObjectHideFlags: 0
@@ -192471,6 +192781,7 @@ GameObject:
   - component: {fileID: 2091571032}
   - component: {fileID: 2091571034}
   - component: {fileID: 2091571033}
+  - component: {fileID: 2091571035}
   m_Layer: 5
   m_Name: CableHint
   m_TagString: Untagged
@@ -192596,6 +192907,18 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2091571031}
   m_CullTransparentMesh: 1
+--- !u!225 &2091571035
+CanvasGroup:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2091571031}
+  m_Enabled: 1
+  m_Alpha: 1
+  m_Interactable: 1
+  m_BlocksRaycasts: 1
+  m_IgnoreParentGroups: 0
 --- !u!1 &2107507889
 GameObject:
   m_ObjectHideFlags: 0
@@ -201892,7 +202215,7 @@ GameObject:
   - component: {fileID: 112944010623636821}
   - component: {fileID: 123040232713332001}
   - component: {fileID: 141598441428367610}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: EnergyDrink_High__326_Tris_
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -306135,7 +306458,7 @@ Transform:
   - {fileID: 5901585290910973464}
   - {fileID: 577776281302910033}
   m_Father: {fileID: 0}
-  m_RootOrder: 2
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &5351330416024754414
 GameObject:
