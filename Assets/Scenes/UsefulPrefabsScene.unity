@@ -73097,11 +73097,11 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   fadeInDuration: 2
-  fadeOutDuration: 1
+  fadeOutDuration: 2
   fadeMessage: {fileID: 723768906}
   fadeAudio: {fileID: 887795174}
-  messageText: You die
-  heartbeatClip: {fileID: 8300000, guid: 3b16710894211874da26d3e9a62d0f14, type: 3}
+  messageText: ' '
+  heartbeatClip: {fileID: 0}
 --- !u!114 &887795171
 MonoBehaviour:
   m_ObjectHideFlags: 0
