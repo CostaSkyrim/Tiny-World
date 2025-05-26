@@ -3,31 +3,27 @@
 public class CutPromptTrigger : MonoBehaviour
 {
     [Header("References")]
-    public GameObject cutPromptUI;          // "E to Cut" UI prompt
-    public GameObject player;               // Assign Player GameObject
-    public GameObject scissorsObject;       // Assign Scissors parent GameObject
-    public MeshRenderer[] scissorsOutlines; // Optional: Scissors glow
-    public MeshRenderer cableOutline;       // Optional: Cable glow
+    public GameObject cutPromptUI;
+    public GameObject player;
+    public GameObject scissorsObject;
+    public MeshRenderer[] scissorsOutlines;
+    public MeshRenderer cableOutline;
+    public InventoryUI inventoryUI;
 
-    [Header("Settings")]
-    public float playerDistance = 2f;       // Distance threshold for player
-    public float scissorsDistance = 1.5f;   // Distance threshold for scissors
+    [Header("Distance Thresholds")]
+    public float maxPlayerX = 7f;
+    public float maxPlayerZ = 5f;
+    public float maxScissors = 5f; // full 3D for scissors
 
     private bool promptShown = false;
     private bool cutPerformed = false;
 
     private void Start()
     {
-        Debug.Log("[CutPromptTrigger] Initialized");
-
         if (cutPromptUI != null)
         {
             cutPromptUI.SetActive(false);
             Debug.Log("[CutPromptTrigger] UI prompt hidden at start");
-        }
-        else
-        {
-            Debug.LogWarning("[CutPromptTrigger] cutPromptUI is not assigned!");
         }
 
         SetOutlines(false);
@@ -35,26 +31,33 @@ public class CutPromptTrigger : MonoBehaviour
 
     private void Update()
     {
-        if (cutPerformed)
-        {
-            Debug.Log("[CutPromptTrigger] Cut already performed. Skipping update.");
-            return;
-        }
+        if (cutPerformed) return;
 
-        float distToPlayer = Vector3.Distance(player.transform.position, transform.position);
+        // Check player proximity (X and Z separately)
+        Vector3 playerPos = player.transform.position;
+        Vector3 cablePos = transform.position;
+
+        float dx = Mathf.Abs(playerPos.x - cablePos.x);
+        float dz = Mathf.Abs(playerPos.z - cablePos.z);
+        bool playerInRange = dx <= maxPlayerX && dz <= maxPlayerZ;
+
+        Debug.Log($"[CutPromptTrigger] Player dx: {dx:F2} (max {maxPlayerX}), dz: {dz:F2} (max {maxPlayerZ})");
+
+        // Check scissors proximity (regular 3D distance)
         float distToScissors = Vector3.Distance(scissorsObject.transform.position, transform.position);
+        bool scissorsInRange = distToScissors <= maxScissors;
 
-        Debug.Log($"[CutPromptTrigger] Player distance: {distToPlayer:F2} / Required: {playerDistance}");
-        Debug.Log($"[CutPromptTrigger] Scissors distance: {distToScissors:F2} / Required: {scissorsDistance}");
+        Debug.Log($"[CutPromptTrigger] Scissors distance: {distToScissors:F2} / max: {maxScissors}");
 
-        if (distToPlayer <= playerDistance && distToScissors <= scissorsDistance)
+        // Show prompt if both in range
+        if (playerInRange && scissorsInRange)
         {
             if (!promptShown)
             {
-                Debug.Log("[CutPromptTrigger] Both player and scissors are close. Showing cut prompt and outlines.");
-                cutPromptUI.SetActive(true);
+                cutPromptUI?.SetActive(true);
                 SetOutlines(true);
                 promptShown = true;
+                Debug.Log("[CutPromptTrigger] Player and scissors in range. Showing UI and outlines.");
             }
 
             if (Input.GetKeyDown(KeyCode.E))
@@ -67,62 +70,43 @@ public class CutPromptTrigger : MonoBehaviour
         {
             if (promptShown)
             {
-                Debug.Log("[CutPromptTrigger] One or both objects are too far. Hiding prompt and outlines.");
-                cutPromptUI.SetActive(false);
+                cutPromptUI?.SetActive(false);
                 SetOutlines(false);
                 promptShown = false;
+                Debug.Log("[CutPromptTrigger] One or both out of range. Hiding UI and outlines.");
             }
         }
     }
 
     void SetOutlines(bool state)
     {
-        Debug.Log($"[CutPromptTrigger] Setting outline state to: {state}");
-
         foreach (var outline in scissorsOutlines)
         {
             if (outline != null)
-            {
                 outline.enabled = state;
-                Debug.Log($"[CutPromptTrigger] Outline on '{outline.name}' set to {state}");
-            }
-            else
-            {
-                Debug.LogWarning("[CutPromptTrigger] Null outline found in scissorsOutlines array");
-            }
         }
 
         if (cableOutline != null)
-        {
             cableOutline.enabled = state;
-            Debug.Log($"[CutPromptTrigger] Cable outline set to {state}");
-        }
-        else
-        {
-            Debug.LogWarning("[CutPromptTrigger] cableOutline is not assigned");
-        }
     }
 
     void PerformCut()
     {
         cutPerformed = true;
-        cutPromptUI.SetActive(false);
+        cutPromptUI?.SetActive(false);
         SetOutlines(false);
 
-        Debug.Log("[CutPromptTrigger] Cut performed! Triggering inventory update...");
-
-        InventoryUI inventory = FindObjectOfType<InventoryUI>();
-        if (inventory != null)
+        if (inventoryUI != null)
         {
-            inventory.ShowCablePickup();
-            Debug.Log("[CutPromptTrigger] InventoryUI found and triggered.");
+            inventoryUI.ShowCablePickup();
+            Debug.Log("[CutPromptTrigger] Inventory UI triggered.");
         }
         else
         {
-            Debug.LogError("[CutPromptTrigger] InventoryUI not found in scene!");
+            Debug.LogWarning("[CutPromptTrigger] Inventory UI reference is missing!");
         }
 
-        Debug.Log("[CutPromptTrigger] Destroying cable GameObject.");
+        Debug.Log("[CutPromptTrigger] Destroying cable.");
         Destroy(gameObject);
     }
 }
