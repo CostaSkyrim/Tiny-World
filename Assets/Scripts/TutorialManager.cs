@@ -1,71 +1,91 @@
-﻿using System.Collections;
-using UnityEngine;
+﻿using UnityEngine;
 using TMPro;
-using UnityEngine.UI;
+using System.Collections;
 
 public class TutorialManager : MonoBehaviour
 {
-    [Header("Cable & Scissors")]
+    [Header("Tutorial Step References")]
+    public GameObject scissors;
     public GameObject cable;
 
-    [Header("Inventory")]
-    public GameObject usbIconPrefab; // UI Image prefab
-    public Transform inventorySlot;  // The Image or Empty inside bottom right slot
+    [Header("Inventory UI")]
+    public GameObject inventoryIconPrefab;   // The USB icon prefab
+    public Transform inventorySlot;          // UI slot where icon lands
 
-    [Header("UI Message")]
-    public TextMeshProUGUI pickupMessageText;
+    [Header("Messages")]
+    public TextMeshProUGUI pickupMessage;    // “You have a USB cable” message
+    public float messageDuration = 2f;
 
+    private bool scissorsMoved = false;
+    private bool cableCut = false;
+
+    // Called from ScissorsInteraction.cs
+    public void EnableScissorPush()
+    {
+        if (scissors != null)
+        {
+            scissorsMoved = true;
+            Debug.Log("Scissors movement started (flag set).");
+        }
+    }
+
+    // Called from CutPromptTrigger.cs
     public void CutCable()
     {
-        Destroy(cable);
+        if (cableCut) return;
 
-        // Show message
-        pickupMessageText.text = "You have a USB cable";
-        pickupMessageText.gameObject.SetActive(true);
-        StartCoroutine(FadeOutText(pickupMessageText, 2f));
+        cableCut = true;
 
-        // Spawn icon and animate it to inventory
-        GameObject icon = Instantiate(usbIconPrefab, inventorySlot.parent); // place in same canvas
-        icon.transform.position = Input.mousePosition; // OR: scissors world → screenPoint → canvas space
-        StartCoroutine(MoveToInventory(icon));
+        if (cable != null)
+        {
+            Destroy(cable);
+            Debug.Log("Cable destroyed.");
+        }
+
+        if (pickupMessage != null)
+        {
+            pickupMessage.text = "You have a USB cable";
+            pickupMessage.gameObject.SetActive(true);
+            StartCoroutine(HideMessageAfterDelay());
+        }
+
+        if (inventoryIconPrefab != null && inventorySlot != null)
+        {
+            StartCoroutine(MoveIconToInventory());
+        }
     }
 
-    IEnumerator MoveToInventory(GameObject icon)
+    private IEnumerator HideMessageAfterDelay()
     {
-        Vector3 start = icon.transform.position;
+        yield return new WaitForSeconds(messageDuration);
+        pickupMessage.gameObject.SetActive(false);
+    }
+
+    private IEnumerator MoveIconToInventory()
+    {
+        GameObject icon = Instantiate(inventoryIconPrefab, inventorySlot.parent);
+        RectTransform iconRect = icon.GetComponent<RectTransform>();
+
+        // Start from random-ish spawn point (optional)
+        iconRect.position = inventorySlot.position + new Vector3(0, 200, 0);
+        Vector3 start = iconRect.position;
         Vector3 end = inventorySlot.position;
 
-        float duration = 0.8f;
-        float elapsed = 0f;
-
-        while (elapsed < duration)
+        float t = 0f;
+        while (t < 1f)
         {
-            icon.transform.position = Vector3.Lerp(start, end, elapsed / duration);
-            elapsed += Time.deltaTime;
+            t += Time.deltaTime * 2f;
+            iconRect.position = Vector3.Lerp(start, end, t);
             yield return null;
         }
 
-        icon.transform.position = end;
-        icon.transform.SetParent(inventorySlot); // parent it to slot
-        icon.GetComponent<RectTransform>().anchoredPosition = Vector2.zero;
+        iconRect.SetParent(inventorySlot);
+        iconRect.anchoredPosition = Vector2.zero;
     }
 
-    IEnumerator FadeOutText(TextMeshProUGUI text, float delay)
+    // Optional public getter
+    public bool HasScissorsMoved()
     {
-        yield return new WaitForSeconds(delay);
-
-        float duration = 1f;
-        float elapsed = 0f;
-        Color c = text.color;
-
-        while (elapsed < duration)
-        {
-            text.color = new Color(c.r, c.g, c.b, Mathf.Lerp(1, 0, elapsed / duration));
-            elapsed += Time.deltaTime;
-            yield return null;
-        }
-
-        text.gameObject.SetActive(false);
-        text.color = c; // Reset for next time
+        return scissorsMoved;
     }
 }

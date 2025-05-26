@@ -3,36 +3,42 @@ using UnityEngine;
 public class ScissorsInteraction : MonoBehaviour
 {
     public Canvas promptCanvas;
-    public GameObject[] outlineMeshes; // Assign both outline objects here
+    public MeshRenderer[] outlineRenderers;      // Assign both outline renderers
+    public Transform targetPosition;             // Where scissors should move
+    public float moveSpeed = 1f;
 
-    private void Start()
+    private bool playerInRange = false;
+    private bool hasMoved = false;
+
+    void Start()
     {
         if (promptCanvas != null)
             promptCanvas.gameObject.SetActive(false);
 
-        foreach (var mesh in outlineMeshes)
-        {
-            if (mesh != null)
-                mesh.SetActive(false);
-        }
+        SetOutlines(false);
+    }
 
-        Debug.Log("ScissorsInteraction initialized with " + outlineMeshes.Length + " outline meshes.");
+    void Update()
+    {
+        if (playerInRange && Input.GetKeyDown(KeyCode.E) && !hasMoved)
+        {
+            hasMoved = true;
+
+            promptCanvas.gameObject.SetActive(false);
+            SetOutlines(false);
+
+            StartCoroutine(MoveScissorsToTarget());
+        }
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        if (other.CompareTag("Player") && !hasMoved)
         {
-            Debug.Log("Player entered trigger zone.");
-
-            if (promptCanvas != null)
-                promptCanvas.gameObject.SetActive(true);
-
-            foreach (var mesh in outlineMeshes)
-            {
-                if (mesh != null)
-                    mesh.SetActive(true);
-            }
+            playerInRange = true;
+            promptCanvas.gameObject.SetActive(true);
+            SetOutlines(true);
+            Debug.Log("Player entered scissors range.");
         }
     }
 
@@ -40,16 +46,49 @@ public class ScissorsInteraction : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
-            Debug.Log("Player exited trigger zone.");
-
-            if (promptCanvas != null)
-                promptCanvas.gameObject.SetActive(false);
-
-            foreach (var mesh in outlineMeshes)
-            {
-                if (mesh != null)
-                    mesh.SetActive(false);
-            }
+            playerInRange = false;
+            promptCanvas.gameObject.SetActive(false);
+            SetOutlines(false);
+            Debug.Log("Player left scissors range.");
         }
+    }
+
+    private System.Collections.IEnumerator MoveScissorsToTarget()
+    {
+        Debug.Log("Scissors start moving...");
+        while (Vector3.Distance(transform.position, targetPosition.position) > 0.01f)
+        {
+            transform.position = Vector3.MoveTowards(transform.position, targetPosition.position, moveSpeed * Time.deltaTime);
+            yield return null;
+        }
+
+        Debug.Log("Scissors reached the target.");
+    }
+
+    private void SetOutlines(bool state)
+    {
+        foreach (var renderer in outlineRenderers)
+        {
+            if (renderer != null)
+                renderer.enabled = state;
+        }
+    }
+
+    public void PlayerEnteredTopZone()
+    {
+        if (hasMoved) return;
+
+        playerInRange = true;
+        if (promptCanvas != null) promptCanvas.gameObject.SetActive(true);
+        SetOutlines(true);
+        Debug.Log("Player entered scissors top zone (via proxy).");
+    }
+
+    public void PlayerExitedTopZone()
+    {
+        playerInRange = false;
+        if (promptCanvas != null) promptCanvas.gameObject.SetActive(false);
+        SetOutlines(false);
+        Debug.Log("Player exited scissors top zone (via proxy).");
     }
 }
