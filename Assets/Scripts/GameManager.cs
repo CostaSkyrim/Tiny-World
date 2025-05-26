@@ -18,6 +18,8 @@ public class GameManager : MonoBehaviour
     private CharacterController charController;
     private bool isDead = false;
 
+    public bool gliderEnabled = false;
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
@@ -84,6 +86,13 @@ public class GameManager : MonoBehaviour
     private IEnumerator RespawnAfterDeathAnimation()
     {
         yield return null;
+
+        if (gliderEnabled)
+        {
+            // We were asked to skip this one shot.
+            gliderEnabled = false;
+            yield return null;
+        }
 
         AnimatorStateInfo state = anim.GetCurrentAnimatorStateInfo(0);
         while (!state.IsName("Death_Liquid") && !state.IsName("Death_Fall") && !state.IsName("Death_Roomba"))
