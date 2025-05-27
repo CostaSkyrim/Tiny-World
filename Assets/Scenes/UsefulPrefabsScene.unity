@@ -31254,12 +31254,12 @@ GameObject:
   - component: {fileID: 332910114}
   - component: {fileID: 332910113}
   m_Layer: 0
-  m_Name: CutZoneCanvas (1)
+  m_Name: PaperPlanePromtCanvas (1)
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &332910112
 RectTransform:
   m_ObjectHideFlags: 0
@@ -151797,7 +151797,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2e41dadf72648814e9065b06a28f6916, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  promptCanvas: {fileID: 1112310908}
+  promptCanvas: {fileID: 332910115}
   outlineRenderers: []
   gliderTargetPosition: {fileID: 1625246569}
   gameManager: {fileID: 235385386}
