@@ -20,6 +20,18 @@ public class GameManager : MonoBehaviour
 
     public bool gliderEnabled = false;
 
+    private void Update()
+    {
+        // Existing game management logic here...
+
+        if (Input.GetKeyDown(KeyCode.Escape))
+        {
+            Debug.Log("Escape pressed. Quitting application.");
+            Application.Quit();
+
+        }
+    }
+
     private void Awake()
     {
         if (Instance == null) Instance = this;
